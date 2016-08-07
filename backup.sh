@@ -5,7 +5,7 @@ export PATH=$PATH:/usr/bin:/usr/local/bin:/bin
 readonly tarball=$BACKUP_NAME$BACKUP_SUFFIX.tar.gz
 
 readonly DOW=$(date +%A)
-readonly PATHS_TO_BACKUP=/tmp/backup-$DOW
+readonly PATHS_TO_BACKUP=/tmp/$BACKUP_NAME-$DOW
 
 pg_dump --format=directory --file=$PATHS_TO_BACKUP $PG_DUMP_OPTIONS --dbname=$PG_CONNECTION_STRING
 
