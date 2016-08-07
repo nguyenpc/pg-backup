@@ -4,6 +4,11 @@ export PATH=$PATH:/usr/bin:/usr/local/bin:/bin
 : ${BACKUP_SUFFIX:=.$(date +"%Y-%m-%d-%H-%M-%S")}
 readonly tarball=$BACKUP_NAME$BACKUP_SUFFIX.tar.gz
 
+readonly DOW=$(date +%A)
+readonly PATHS_TO_BACKUP=/tmp/backup-$DOW
+
+pg_dump --format=directory --file=$PATHS_TO_BACKUP $PG_DUMP_OPTIONS --dbname=$PG_CONNECTION_STRING
+
 # Create a gzip compressed tarball with the volume(s)
 tar czf $tarball $BACKUP_TAR_OPTION $PATHS_TO_BACKUP
 

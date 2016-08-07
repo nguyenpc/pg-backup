@@ -1,5 +1,5 @@
 FROM ubuntu:trusty
-MAINTAINER Borja Burgos <borja@tutum.co>, Mia Iversen <mia@chillfox.com
+MAINTAINER Lukasz Karolewski
 
 RUN apt-get update && apt-get install -y python-pip && pip install awscli
 
@@ -12,7 +12,8 @@ ENV S3_BUCKET_NAME docker-backups.example.com
 ENV AWS_ACCESS_KEY_ID **DefineMe**
 ENV AWS_SECRET_ACCESS_KEY **DefineMe**
 ENV AWS_DEFAULT_REGION us-east-1
-ENV PATHS_TO_BACKUP /paths/to/backup
+ENV PG_DUMP_OPTIONS --verbose
+ENV PG_CONNECTION_STRING postgresql://[user[:password]@][netloc][:port][/dbname][?param1=value1&...]
 ENV BACKUP_NAME backup
 ENV RESTORE false
 
