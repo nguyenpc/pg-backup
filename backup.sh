@@ -10,7 +10,7 @@ readonly PATHS_TO_BACKUP=/tmp/$BACKUP_NAME-$DOW
 pg_dump --format=directory --file=$PATHS_TO_BACKUP $PG_DUMP_OPTIONS --dbname=$PG_CONNECTION_STRING
 
 # Create a gzip compressed tarball with the volume(s)
-tar czf $tarball $BACKUP_TAR_OPTION $PATHS_TO_BACKUP
+tar czf $tarball -C /tmp $BACKUP_TAR_OPTION $PATHS_TO_BACKUP
 
 # Create bucket, if it doesn't already exist
 BUCKET_EXIST=$(aws s3 ls | grep $S3_BUCKET_NAME | wc -l)
