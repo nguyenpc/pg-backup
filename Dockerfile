@@ -1,7 +1,7 @@
 FROM ubuntu:trusty
 MAINTAINER Lukasz Karolewski
 
-RUN apt-get update && apt-get install -y python-pip && pip install awscli
+RUN apt-get update && apt-get install -y python-pip postgresql-client && pip install awscli
 
 ADD backup.sh /backup.sh
 ADD restore.sh /restore.sh
