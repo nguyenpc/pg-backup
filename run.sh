@@ -12,7 +12,7 @@ if [ -n "$CRON_TIME" ]; then
   
   # create brand new crontab.conf
   if [ -n "$CRON_MAILTO" ]; then
-    echo 'MAILTO="${CRON_MAILTO}"' > /crontab.conf
+    echo "MAILTO=\"${CRON_MAILTO}\"" > /crontab.conf
   else
     echo "" > /crontab.conf
   fi
@@ -20,6 +20,7 @@ if [ -n "$CRON_TIME" ]; then
   # configure cron and email only stderr 
   echo "${CRON_TIME} /backup.sh >> /dockup.log /dev/null" >> /crontab.conf
   crontab  /crontab.conf
-  echo "=> Running dockup backups as a cronjob for ${CRON_TIME}" error will be mailed to ${CRON_MAILTO}
+  echo "=> Running dockup backups as a cronjob for ${CRON_TIME}"
+  echo "=> Errors will be mailed to ${CRON_MAILTO}"
   exec cron -f
 fi
