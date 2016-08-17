@@ -1,36 +1,20 @@
 
-# Dockup
+# pg-dockup
 
-[![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/)
+Docker image to backup your postgres database deployed to Docker container
 
-Docker image to backup your Docker container volumes
-
-Why the name? Docker + Backup = Dockup
+Why the name? pg_dump + docker + backup = pg-dockup
 
 # Usage
-
-You have a container running with one or more volumes:
-
-```
-$ docker run -d --name mysql tutum/mysql
-```
-
-From executing a `$ docker inspect mysql` we see that this container has two volumes:
-
-```
-"Volumes": {
-            "/etc/mysql": {},
-            "/var/lib/mysql": {}
-        }
-```
+Link this container to your postgres db
 
 ## Backup
-Launch `dockup` container with the following flags:
+Launch `pg-dockup` container with the following flags:
 
 ```
 $ docker run --rm \
 --env-file env.txt \
---volumes-from mysql \
+--link mysql \
 --name dockup tutum/dockup:latest
 ```
 
@@ -40,13 +24,16 @@ The contents of `env.txt` being:
 AWS_ACCESS_KEY_ID=<key_here>
 AWS_SECRET_ACCESS_KEY=<secret_here>
 AWS_DEFAULT_REGION=us-east-1
-BACKUP_NAME=mysql
-PATHS_TO_BACKUP=/etc/mysql /var/lib/mysql
+BACKUP_NAME=backup
 S3_BUCKET_NAME=docker-backups.example.com
 RESTORE=false
+PG_DUMP_OPTIONS --verbose
+PG_CONNECTION_STRING postgresql://[user[:password]@][netloc][:port][/dbname][?param1=value1&...]
+CRON_TIME * */2 * *
+CRON_MAILTO admin@some.domain.com
 ```
 
-`dockup` will use your AWS credentials to create a new bucket with name as per the environment variable `S3_BUCKET_NAME`, or if not defined, using the default name `docker-backups.example.com`. The paths in `PATHS_TO_BACKUP` will be tarballed, gzipped, time-stamped and uploaded to the S3 bucket.
+`pg-dockup` will use your AWS credentials to create a new bucket with name as per the environment variable `S3_BUCKET_NAME`, or if not defined, using the default name `docker-backups.example.com`. The paths in `PATHS_TO_BACKUP` will be tarballed, gzipped, time-stamped and uploaded to the S3 bucket.
 
 
 ## Restore
@@ -77,6 +64,3 @@ These rules are enforced in some regions.
 
 
 To perform a restore launch the container with the RESTORE variable set to true
-
-
-![](http://s.tutum.co.s3.amazonaws.com/support/images/dockup-readme.png)
