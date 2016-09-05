@@ -7,6 +7,10 @@ readonly tarball=$BACKUP_NAME$BACKUP_SUFFIX.tar.gz
 readonly DOW=$(date +%A)
 readonly PATHS_TO_BACKUP=/tmp/$BACKUP_NAME-$DOW
 
+# Clean destination path
+rm -rf $PATHS_TO_BACKUP
+
+# Run backup
 pg_dump --format=directory --file=$PATHS_TO_BACKUP $PG_DUMP_OPTIONS --dbname=$PG_CONNECTION_STRING
 
 # Create a gzip compressed tarball with the volume(s)
