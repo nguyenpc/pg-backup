@@ -9,7 +9,7 @@ ENV LOCAL_BACKUP_DIR $DIR/local-backup
 RUN mkdir $DIR 
 WORKDIR $DIR
 COPY . $DIR
-RUN chmod 755 /*.sh
+RUN chmod 755 $DIR/*.sh
 
 VOLUME $LOCAL_BACKUP_DIR
 
