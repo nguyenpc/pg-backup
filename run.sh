@@ -17,10 +17,10 @@ if [ -n "$CRON_TIME" ]; then
     echo "" > /crontab.conf
   fi
 
-  # configure cron and email only stderr 
-  echo "${CRON_TIME} /backup.sh >> /dockup.log /dev/null" >> /crontab.conf
+  # configure cron
+  echo "${CRON_TIME} /backup.sh" >> /crontab.conf
   crontab  /crontab.conf
   echo "=> Running dockup backups as a cronjob for ${CRON_TIME}"
-  echo "=> Errors will be mailed to ${CRON_MAILTO}"
+  echo "=> Output will be mailed to ${CRON_MAILTO}"
   exec cron -f
 fi

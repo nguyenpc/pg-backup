@@ -27,10 +27,10 @@ AWS_DEFAULT_REGION=us-east-1
 BACKUP_NAME=backup
 S3_BUCKET_NAME=docker-backups.example.com
 RESTORE=false
-PG_DUMP_OPTIONS --verbose
-PG_CONNECTION_STRING postgresql://[user[:password]@][netloc][:port][/dbname][?param1=value1&...]
-CRON_TIME * */2 * *
-CRON_MAILTO admin@some.domain.com
+PG_DUMP_OPTIONS='--verbose'
+PG_CONNECTION_STRING='postgresql://[user[:password]@][netloc][:port][/dbname][?param1=value1&...]'
+CRON_TIME='* */2 * *'
+CRON_MAILTO=admin@some.domain.com
 ```
 
 `pg-dockup` will use your AWS credentials to create a new bucket with name as per the environment variable `S3_BUCKET_NAME`, or if not defined, using the default name `docker-backups.example.com`. The paths in `PATHS_TO_BACKUP` will be tarballed, gzipped, time-stamped and uploaded to the S3 bucket.
