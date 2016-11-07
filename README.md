@@ -27,6 +27,7 @@ AWS_ACCESS_KEY_ID=<key_here>
 AWS_SECRET_ACCESS_KEY=<secret_here>
 AWS_DEFAULT_REGION=us-east-1
 AWS_S3_BUCKET_NAME=docker-backups.example.com
+AWS_S3_CP_OPTIONS='--sse'
 
 PG_DUMP_OPTIONS='--verbose'
 PG_CONNECTION_STRING='postgresql://[user[:password]@][netloc][:port][/dbname][?param1=value1&...]'
@@ -35,14 +36,20 @@ CRON_TIME='* */2 * *'
 CRON_MAILTO=admin@some.domain.com
 ```
 
+for `AWS_S3_CP_OPTIONS` refer to `http://docs.aws.amazon.com/cli/latest/reference/s3/cp.html`
+
 `pg-dockup` will use your AWS credentials to create a new bucket with name as per the environment variable `AWS_S3_BUCKET_NAME`, or if not defined, using the default name `docker-backups.example.com`. The paths in `PATHS_TO_BACKUP` will be tarballed, gzipped, time-stamped and uploaded to the S3 bucket.
 
 
 ## Restore
-last 7 backups are stored locally,
-use `download_last.sh` to fetch last uploaded backup to local dir
+connect to running container 
 
-to restore db run `cat backup_file.tar.gz | gunzip | psql -U user dbname` 
+`docker exec -it container_name /bin/bash`
+
+last 7 backups are stored locally in `/home/pg-dockup/local-backup`
+if that's missing, use `download_last.sh` to fetch last uploaded backup to above directory
+
+to restore, make sure database was created and db run `cat backup_file.tar.gz | gunzip | psql -U user dbname` 
 
 ## A note on Buckets
 

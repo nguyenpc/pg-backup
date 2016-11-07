@@ -19,6 +19,7 @@ ENV AWS_ACCESS_KEY_ID **DefineMe**
 ENV AWS_SECRET_ACCESS_KEY **DefineMe**
 ENV AWS_DEFAULT_REGION us-east-1
 ENV AWS_S3_BUCKET_NAME **DefineMe**
+ENV AWS_S3_CP_OPTIONS --sse
 
 ENV PG_DUMP_OPTIONS --verbose
 ENV PG_CONNECTION_STRING postgresql://[user[:password]@][netloc][:port][/dbname][?param1=value1&...]
@@ -26,4 +27,4 @@ ENV PG_CONNECTION_STRING postgresql://[user[:password]@][netloc][:port][/dbname]
 #ENV CRON_TIME * */2 * *
 #ENV CRON_MAILTO admin@some.domain.com
 
-CMD ["bash $DIR/run.sh"]
+CMD ["./run.sh"]

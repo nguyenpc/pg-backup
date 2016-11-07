@@ -15,4 +15,4 @@ then
 fi
 
 # Upload the backup to S3 with timestamp
-aws s3 --region $AWS_DEFAULT_REGION cp $LOCAL_BACKUP s3://$AWS_S3_BUCKET_NAME/$REMOTE_BACKUP
+aws s3 --region $AWS_DEFAULT_REGION cp $LOCAL_BACKUP s3://$AWS_S3_BUCKET_NAME/$REMOTE_BACKUP $AWS_S3_CP_OPTIONS
