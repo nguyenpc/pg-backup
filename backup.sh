@@ -1,4 +1,5 @@
 #!/bin/bash
+export PATH=$PATH:/usr/bin:/usr/local/bin:/bin
 
 # Get timestamp
 readonly REMOTE_BACKUP=$BACKUP_NAME-$(date +"%Y-%m-%dT%H:%M:%SZ").tar.gz
