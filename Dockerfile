@@ -25,6 +25,5 @@ ENV PG_DUMP_OPTIONS --verbose
 ENV PG_CONNECTION_STRING postgresql://[user[:password]@][netloc][:port][/dbname][?param1=value1&...]
 
 #ENV CRON_TIME * */2 * *
-#ENV CRON_MAILTO admin@some.domain.com
 
 CMD ["./run.sh"]

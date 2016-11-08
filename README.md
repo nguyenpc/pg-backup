@@ -33,7 +33,6 @@ PG_DUMP_OPTIONS='--verbose'
 PG_CONNECTION_STRING='postgresql://[user[:password]@][netloc][:port][/dbname][?param1=value1&...]'
 
 CRON_TIME='* */2 * *'
-CRON_MAILTO=admin@some.domain.com
 ```
 
 for `AWS_S3_CP_OPTIONS` refer to `http://docs.aws.amazon.com/cli/latest/reference/s3/cp.html`
