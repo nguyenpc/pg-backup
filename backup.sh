@@ -2,8 +2,8 @@
 export PATH=$PATH:/usr/bin:/usr/local/bin:/bin
 
 # Get timestamp
-readonly REMOTE_BACKUP=$BACKUP_NAME-$(date +"%Y-%m-%dT%H:%M:%SZ").tar.gz
-readonly LOCAL_BACKUP=$LOCAL_BACKUP_DIR/$BACKUP_NAME-$(date +%A).tar.gz
+readonly LOCAL_BACKUP=$LOCAL_BACKUP_DIR/$BACKUP_NAME-$(date +%A).gzip
+readonly REMOTE_BACKUP=$BACKUP_NAME-$(date +"%Y-%m-%dT%H:%M:%SZ").gzip
 
 # Run backup
 pg_dump --dbname=$PG_CONNECTION_STRING $PG_DUMP_OPTIONS | gzip > $LOCAL_BACKUP
