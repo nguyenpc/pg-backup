@@ -41,36 +41,18 @@ for `AWS_S3_CP_OPTIONS` refer to `http://docs.aws.amazon.com/cli/latest/referenc
 
 
 ## Restore
-connect to running container 
 
-`docker exec -it container_name /bin/bash`
-
-last 7 backups are stored locally in `/home/pg-dockup/local-backup`
-if that's missing, use `download_last.sh` to fetch last uploaded backup to above directory
-
-to restore, make sure database was created and db run `cat backup_file.tar.gz | gunzip | psql -U user dbname` 
-
-## A note on Buckets
-
-> [Bucket naming guidelines](http://docs.aws.amazon.com/cli/latest/userguide/using-s3-commands.html):
-> "Bucket names must be unique and should be DNS compliant. Bucket names can contain lowercase letters, numbers, hyphens and periods. Bucket names can only start and end with a letter or number, and cannot contain a period next to a hyphen or another period."
-
-These rules are enforced in some regions.
+Last 7 backups are stored locally in `/home/pg-dockup/local-backup`.
 
 
-[AWS S3 Regions](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
-
-| Region name               | Region         |
-| ------------------------- | -------------- |
-| US Standard               | us-east-1      |
-| US West (Oregon)          | us-west-2      |
-| US West (N. California)   | us-west-1      |
-| EU (Ireland)              | eu-west-1      |
-| EU (Frankfurt)            | eu-central-1   |
-| Asia Pacific (Singapore)  | ap-southeast-1 |
-| Asia Pacific (Sydney)     | ap-southeast-2 |
-| Asia Pacific (Tokyo)      | ap-northeast-1 |
-| South America (Sao Paulo) | sa-east-1      |
+If that's missing:
+- connect to container `docker exec -it container_name /bin/bash` 
+- run `download_last.sh` to fetch last uploaded backup 
 
 
-To perform a restore launch the container with the RESTORE variable set to true
+Once you have local backup, create container that has pgsql installed: `docker run --rm -it --volumes-from pg-dockup --link you_pg_db_container:pg postgres:9.5 /bin/bash`
+
+
+To restore db:
+ - `psql -h host -U user dbname -c 'CREATE database dbname;'`
+ - `cat backup_file.tar.gz | gunzip | psql -h host -U user dbname` 
