@@ -1,7 +1,7 @@
 FROM ubuntu:xenial
 MAINTAINER Lukasz Karolewski
 
-RUN apt-get update && apt-get install -y python-pip postgresql-client-9.5 cron && pip install awscli
+RUN apt-get update && apt-get install -y python-pip postgresql-client-9.6 cron && pip install awscli
 
 ENV DIR /home/pg-dockup
 ENV LOCAL_BACKUP_DIR $DIR/local-backup
