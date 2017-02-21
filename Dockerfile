@@ -1,6 +1,8 @@
 FROM ubuntu:xenial
 MAINTAINER Lukasz Karolewski
 
+RUN sudo add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 RUN apt-get update && apt-get install -y python-pip postgresql-client-9.6 cron && pip install awscli
 
 ENV DIR /home/pg-dockup
