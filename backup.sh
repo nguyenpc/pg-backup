@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 export PATH=$PATH:/usr/bin:/usr/local/bin:/bin
 
 # Get timestamp

@@ -1,7 +1,8 @@
 FROM alpine:edge
 MAINTAINER Lukasz Karolewski
 
-RUN apk add --no-cache postgresql-client 
+RUN apk add --no-cache postgresql
+#RUN apk add --no-cache postgresql-client pg_dump is missing in this package
 
 RUN \
 	apk -Uuv add groff less python py-pip && \
@@ -9,7 +10,7 @@ RUN \
 	apk --purge -v del py-pip && \
 	rm /var/cache/apk/*
 
-ENV DIR /home/pg-dockup
+ENV DIR /root/pg-dockup
 ENV LOCAL_BACKUP_DIR $DIR/local-backup
 
 RUN mkdir -p $DIR 
@@ -32,4 +33,4 @@ ENV PG_CONNECTION_STRING postgresql://[user[:password]@][netloc][:port][/dbname]
 
 #ENV CRON_TIME * */2 * *
 
-CMD ["$DIR/run.sh"]
+CMD $DIR/run.sh
