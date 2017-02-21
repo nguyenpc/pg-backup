@@ -1,9 +1,14 @@
-FROM ubuntu:xenial
+FROM alpine:edge
 MAINTAINER Lukasz Karolewski
 
-RUN add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"
-RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-RUN apt-get update && apt-get install -y python-pip postgresql-client-9.6 cron && pip install awscli
+RUN apk add --no-cache postgresql-client 
+
+RUN \
+	mkdir -p /aws && \
+	apk -Uuv add groff less python py-pip && \
+	pip install awscli && \
+	apk --purge -v del py-pip && \
+	rm /var/cache/apk/*
 
 ENV DIR /home/pg-dockup
 ENV LOCAL_BACKUP_DIR $DIR/local-backup
