@@ -1,7 +1,11 @@
 FROM ubuntu:xenial
 MAINTAINER Lukasz Karolewski
+RUN apt-get update && apt-get install -y wget
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
+  apt-key add -
 
-RUN apt-get update && apt-get install -y python-pip postgresql-client-9.5 cron && pip install awscli
+RUN sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main" >> /etc/apt/sources.list.d/postgresql.list'
+RUN apt-get update && apt-get install -y python-pip postgresql-client-9.6 cron && pip install awscli
 
 ENV DIR /home/pg-dockup
 ENV LOCAL_BACKUP_DIR $DIR/local-backup
