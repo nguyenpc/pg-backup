@@ -11,6 +11,6 @@ if [ -n "$CRON_TIME" ]; then
   chmod 0644 /etc/cron.d/pg-dockup
   touch /var/log/cron.log
 
-  echo "=> Running dockup backups with following crontab"
+  echo "=> Running dockup backups with following crontab $CRON_TIME"
   cron && tail -f /var/log/cron.log
 fi
