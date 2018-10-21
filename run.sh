@@ -17,6 +17,9 @@ if [ -n "$CRON_TIME" ]; then
   printf "\n" >> $CRON_FILE # needs a newline
   
   chmod 0644 $CRON_FILE
-  touch /etc/crontab /etc/cron.*/*
+
+  # https://stackoverflow.com/questions/21926465/issues-running-cron-in-docker-on-different-hosts
+  sed -e '/pam_loginuid.so/ s/^#*/#/' -i /etc/pam.d/cron
+
   service cron start && tail -f $LOGFILE
 fi
