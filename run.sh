@@ -18,5 +18,5 @@ if [ -n "$CRON_TIME" ]; then
   
   chmod 0644 $CRON_FILE
 
-  cron && tail -f $LOGFILE
+  service cron start && tail -f $LOGFILE
 fi
