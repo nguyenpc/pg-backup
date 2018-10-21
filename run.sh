@@ -6,7 +6,7 @@ LOGFILE=/var/log/backup.log
 ./backup.sh >> $LOGFILE 2>&1
 
 if [ -n "$CRON_TIME" ]; then
-  echo "=> Backup running with $CRON_TIME schedule"
+  echo "=> configured crontab for backup with $CRON_TIME schedule"
 
   # set environment vars for cron
   env > /etc/environment
@@ -17,6 +17,6 @@ if [ -n "$CRON_TIME" ]; then
   printf "\n" >> $CRON_FILE # needs a newline
   
   chmod 0644 $CRON_FILE
-
+  touch /etc/crontab /etc/cron.*/*
   service cron start && tail -f $LOGFILE
 fi
