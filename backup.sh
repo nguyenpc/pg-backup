@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+set -e
+set -x
+
 echo "Starting backup"
 export PATH=$PATH:/usr/bin:/usr/local/bin:/bin
 
