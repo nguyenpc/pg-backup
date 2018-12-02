@@ -6,7 +6,7 @@ echo "Starting backup"
 export PATH=$PATH:/usr/bin:/usr/local/bin:/bin
 
 # Generate filenames
-readonly $BACKUP_FILENAME=$BACKUP_NAME-$(date +"%Y-%m-%dT%H:%M:%SZ").gzip
+readonly BACKUP_FILENAME=$BACKUP_NAME-$(date +"%Y-%m-%dT%H-%M-%SZ").gzip
 readonly LOCAL_BACKUP_PATH=$LOCAL_BACKUP_DIR/$BACKUP_FILENAME
 
 # Run backup
