@@ -18,7 +18,7 @@ WORKDIR $DIR
 VOLUME $LOCAL_BACKUP_DIR
 
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get install wget gnupg2 -y
+RUN apt-get install wget gnupg2 curl -y
 RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main' >> /etc/apt/sources.list.d/pgdg.list
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 
