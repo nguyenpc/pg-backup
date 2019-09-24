@@ -29,6 +29,13 @@ AWS_S3_BUCKET_NAME=my-backups.example.com
 
 # if defined will install cron, time in UTC. By default will run backup once and exit
 CRON_TIME=0 2 * * *
+
+SLACK_HOOK=https://hooks.slack.com/services/xxxxxx/xxxxxx/xxxxxx
+SLACK_USERNAME=PGDockupBot
+SLACK_CHANNEL="#general"
+SLACK_EMOJI=":ghost:"
+SLACK_MESSAGE="Data has been backed up and uploaded to s3 successfully"
+
 ```
 
 ## Backup
