@@ -6,6 +6,11 @@ ENV AWS_S3_CP_OPTIONS --sse AES256
 ENV PG_DUMP_OPTIONS --verbose
 ENV DIR /home/backup
 ENV LOCAL_BACKUP_DIR $DIR/local-backup
+ENV SLACK_HOOK
+ENV SLACK_USERNAME PGDockupBot
+ENV SLACK_CHANNEL "#general"
+ENV SLACK_EMOJI ":ghost:"
+ENV SLACK_MESSAGE "Data has been backed up and uploaded to s3 successfully"
 
 RUN mkdir $DIR 
 WORKDIR $DIR
