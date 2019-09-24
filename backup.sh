@@ -27,4 +27,12 @@ find . -type f -name '*.gzip' -mtime +30 -delete
 
 # Upload the backup to S3
 aws s3 --region $AWS_DEFAULT_REGION cp $LOCAL_BACKUP_PATH.gzip s3://$AWS_S3_BUCKET_NAME/$BACKUP_FILENAME.gzip $AWS_S3_CP_OPTIONS
+ 
+if [ -s $SLACK_HOOK ];
+then 
+  SLACK_MESSAGE=$SLACK_MESSAGE - $BACKUP_FILENAME
+  PAYLOAD="payload={\"channel\": \"$SLACK_CHANNEL\", \"username\": \"$SLACK_USERNAME\", \"text\": \"$SLACK_MESSAGE\", \"icon_emoji\": \"$SLACK_EMOJI\"}"
+  curl -X POST --data-urlencode "$PAYLOAD" "$SLACK_HOOK"
+fi
+
 echo "backup done"
