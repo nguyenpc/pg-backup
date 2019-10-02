@@ -1,7 +1,9 @@
 
-# pg-dockup
+# pg-backup
 
 Recurring backup of your postgres database to s3, with local copy for instant access.
+
+Inspired from https://github.com/lukasz-karolewski/pg-dockup
 
 # Usage
 
